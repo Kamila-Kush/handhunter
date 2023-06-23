@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h1>Компании</h1>
+      {% for c in companies %}
+          <div><strong>{{c.title}}</strong> {% if c.is_hunting %} - Ищем сотрудников
+
+              {% endif %}
+          </div>
+      {% endfor %}
+
+</body>
+</html>
