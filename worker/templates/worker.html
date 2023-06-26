@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+      <h1>Информация о кандидате </h1>
+      <ul>
+          <li>Login: {{ worker.user.username }}</li>
+        <li>Имя: {{ worker.name }} </li>
+        <li>Специализация: {{ worker.specialization }}</li>
+        <li>Ожидаемая зарплата: {{worker.salary }}</li>
+        <li>Открыт для предложений: {{ worker.is_searching }}</li>
+      </ul>
+
+        <h2>Интересующие вакансии:</h2>
+        {% for v in worker.vacancy_set.all %}
+            <div>{{ v.title }}</div>
+        {% endfor %}
+</body>
+</html>
