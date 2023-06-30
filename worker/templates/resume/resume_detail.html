@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>{{ resume.title }}</h1>
+  <div>{{ resume.education_degree }}</div>
+  <div>{{ resume.age }}</div>
+  <div>{{ resume.experience_years }}</div>
+  <div>{{ resume.previous_employment }}</div>
+  <hr/>
+  <div>{{ resume.created_at }}</div>
+
+{% endblock %}

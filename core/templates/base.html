@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+      {% block my_title %}
+        Hand Hunter
+      {% endblock %}
+    </title>
+</head>
+<body>
+    <nav> <a href="/">Домой</a>|
+          <a href='vacancies'>Вакансии</a>|
+          <a href='workers'>Кандидаты</a>|
+          <a href="resume-list">Резюме</a>|
+          <a href='companies'>Компании</a>|
+          <a href="/about_us">О нас</a>|
+        {% if request.user.is_authenticated %}
+            Привет, {{ request.user.username }}!
+        {% else %}
+            Пожалуйста, авторизуйтесь.
+        {% endif %}
+
+    </nav>
+    {% block content %}
+
+    {% endblock %}
+
+   <br><br><br><br><br><br><br><br><br><br>
+
+
+
+    <footer>
+        <hr>
+        8805355<br/>
+        Адрес: Бишкек, 7 мкрн
+    </footer>
+
+
+</body>
+</html>

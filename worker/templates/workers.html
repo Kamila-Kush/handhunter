@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Кандидаты</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
+
     <h1>Работники</h1>
       {% for w in workers %}
         <div>{{w.name}} - {{w.specialization}}</div>
       {% endfor %}
-</body>
-</html>
+
+{% endblock %}

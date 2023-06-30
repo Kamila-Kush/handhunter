@@ -31,16 +31,18 @@ class Comment(models.Model):
         return self.author.username
 
 
-class CV(models.Model):
-    name = models.CharField(max_length=200)
+class Resume(models.Model):
+    title = models.CharField(max_length=200)
     education_degree = models.CharField(max_length=200)
     age = models.IntegerField()
     experience_years = models.IntegerField()
     previous_employment = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     worker = models.ForeignKey(
         to=Worker,
-        on_delete = models.CASCADE
+        on_delete = models.CASCADE,
+        related_name = 'resume'
     )
     def __str__(self):
         return self.name
