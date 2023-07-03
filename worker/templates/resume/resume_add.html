@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+    <form method="POST">
+        {% csrf_token %}
+      <input type="text" name="form-title" placeholder="Профессия">
+        <input type="text" name="form-edu" placeholder="Образование">
+        <input type="number" name="form-age" placeholder="Возраст">
+        <input type="number" name="form-ex_y" placeholder="Опыт работы">
+        <input type="text" name="form-pr_e" placeholder="Предыдущее место работы">
+        <button>Добавить</button>
+    </form>
+
+{% endblock %}

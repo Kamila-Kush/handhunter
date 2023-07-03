@@ -21,7 +21,7 @@ from worker.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', homepage),
+    path('', homepage, name='home'),
     path('about_us/', about_us),
     path('vacancies/', vacancy_list),
     path('companies/', company_list),
@@ -30,5 +30,7 @@ urlpatterns = [
     path("resume-list/", resume_list),
     path("resume-info/<int:id>/", resume_info),
     path("my-resume/", my_resume, name='my-resume'),
-    path('vacancy/<int:id>/', vacancy_info)
+    path('vacancy/<int:id>/', vacancy_info, name='vacancy-info'),
+    path('search/', search, name='search'),
+    path('add-resume/', add_resume, name='add-resume')
 ]

@@ -36,7 +36,7 @@ class Resume(models.Model):
     education_degree = models.CharField(max_length=200)
     age = models.IntegerField()
     experience_years = models.IntegerField()
-    previous_employment = models.CharField(max_length=255)
+    previous_employment = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     worker = models.ForeignKey(
@@ -45,4 +45,4 @@ class Resume(models.Model):
         related_name = 'resume'
     )
     def __str__(self):
-        return self.name
+        return self.title
