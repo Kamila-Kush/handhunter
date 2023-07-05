@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="title" value='{{ resume.title }}'><br><br>
+        <input type="text" name="education_degree" placeholder="education_degree" value='{{ resume.education_degree }}'><br><br>
+        <input type="number" name="age" placeholder="age" value="{{ resume.age }}"><br><br>
+        <input type="number" name="experience_years" value="{{ resume.experience_years }}"><br><br>
+        <input type="email" name="email" placeholder="email" value='{{ resume.email }}'><br><br>
+        <input type="text" name="prev_emp" placeholder="previous_employment" value='{{ resume.previous_employment }}'><br><br>
+        <button>Изменить</button>
+    </form>
+
+{% endblock %}

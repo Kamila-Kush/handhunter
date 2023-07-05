@@ -12,11 +12,10 @@ def worker_info(request, id):
     return render(request, 'worker.html', context)
 
 def resume_list(request):
-    resume_query = Resume.objects.all()
+    resumes = Resume.objects.all()
+    context = {'resume':resumes}
     return render(
-        request, 'resume/resume_list.html',
-        {'resume: resume_query'}
-    )
+        request, 'resume/resume_list.html', context)
 
 def resume_info(request, id):
     resume_object = Resume.object.get(id=id)
@@ -26,10 +25,10 @@ def resume_info(request, id):
     )
 
 def my_resume(request):
-    if request.is_authanticated:
+    if request.is_authenticated:
         resume_query = Resume.objects.filter(worker=request.user.worker) # = request.user.worker.all()
         return render(
-            request, 'resume/resume_list.html',
+            request, 'resume/my_resume_list.html',
             {'resumes': resume_query}
         )
     else:
@@ -50,3 +49,21 @@ def add_resume(request):
         new_resume.previous_employment = request.POST["form-pr_e"]
         new_resume.save()
         return HttpResponse("Резюме сохранено")
+
+def resume_edit(request, id):
+    if request.is_authenticated:
+        resume = Resume.objects.get(id=id)
+        if request.method == "POST":
+            resume.title = request.POST["title"]
+            resume.education_degree = request.POST["education_degree"]
+            resume.age = request.POST["age"]
+            resume.experience_years = request.POST["experience_years"]
+            resume.previous_employment = request.POST["prev_emp"]
+            resume.save()
+            return redirect(f'/resume/{resume.id}/')
+        return render(
+            request, 'resume/resume_edit.html',
+            {"resume": resume}
+        )
+    else:
+        return redirect('home')
