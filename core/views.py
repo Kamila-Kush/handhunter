@@ -1,5 +1,6 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from .models import Vacancy, Company
+from django.contrib.auth.models import User
 # Create your views here.
 def homepage(request):
     return render(request=request, template_name='index.html')
@@ -30,3 +31,44 @@ def search(request):
     context={"vacancies": vacancy_list}
     return render(request, 'vacancy/vacancies.html', context)
 
+def reg_view(request):
+    if request.method == "POST":
+        user = User(
+            username=request.POST["username"]
+        )
+        user.save()
+        user.set_password(request.POST["password"])
+        user.save()
+        return HttpResponse('Регистрация завершена')
+    return render(
+        request,
+        "auth/registration.html"
+    )
+
+def add_vacancy(request):
+    if request.method=="POST":
+        new_vac = Vacancy(
+            title=request.POST["form-title"],
+            salary=int(request.POST["form-salary"]),
+            description=request.POST["form-descr"],
+            email = request.POST["form-email"],
+            contacts = request.POST["form-cont"]
+        )
+        new_vac.save()
+        return redirect(f'/vacancy/{new_vac.id}/')
+    return render(request, 'vacancy/add_vacancy.html')
+
+def vacancy_edit(request, id):
+    vacancy = Vacancy.objects.get(id=id)
+    if request.method == "POST":
+        vacancy.title = request.POST["title"]
+        vacancy.salary = int(request.POST["salary"])
+        vacancy.description = request.POST["description"]
+        vacancy.email = request.POST["email"]
+        vacancy.contacts = request.POST["contacts"]
+        vacancy.save()
+        return redirect(f'/vacancy/{vacancy.id}/')
+    return render(
+        request, 'vacancy/vacancy_edit_form.html',
+        {"vacancy": vacancy}
+    )
