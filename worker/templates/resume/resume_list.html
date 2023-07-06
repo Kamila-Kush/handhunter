@@ -2,9 +2,11 @@
 
 
 {% block content %}
-
+    <h1>Резюме</h1>
     {% for r in resumes %}
-        <div><a href="/resume-info/{{r.id}}">{{ r.title }}</a></div>
+        <div>
+            <a href="{% url 'resume-info' r.id %}">{{ r.title }}</a>
+        </div>
     {% endfor %}
 
 {% endblock %}

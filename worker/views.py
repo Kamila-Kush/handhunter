@@ -13,19 +13,19 @@ def worker_info(request, id):
 
 def resume_list(request):
     resumes = Resume.objects.all()
-    context = {'resume':resumes}
+    context = {'resumes': resumes}
     return render(
         request, 'resume/resume_list.html', context)
 
 def resume_info(request, id):
-    resume_object = Resume.object.get(id=id)
+    resume_object = Resume.objects.get(id=id)
     return render(
         request, 'resume/resume_detail.html',
-        {'resume':resume_object}
+        {'resume': resume_object}
     )
 
 def my_resume(request):
-    if request.is_authenticated:
+    if request.user.is_authenticated:
         resume_query = Resume.objects.filter(worker=request.user.worker) # = request.user.worker.all()
         return render(
             request, 'resume/my_resume_list.html',
@@ -51,19 +51,16 @@ def add_resume(request):
         return HttpResponse("Резюме сохранено")
 
 def resume_edit(request, id):
-    if request.is_authenticated:
-        resume = Resume.objects.get(id=id)
-        if request.method == "POST":
-            resume.title = request.POST["title"]
-            resume.education_degree = request.POST["education_degree"]
-            resume.age = request.POST["age"]
-            resume.experience_years = request.POST["experience_years"]
-            resume.previous_employment = request.POST["prev_emp"]
-            resume.save()
-            return redirect(f'/resume/{resume.id}/')
-        return render(
-            request, 'resume/resume_edit.html',
-            {"resume": resume}
-        )
-    else:
-        return redirect('home')
+    resume = Resume.objects.get(id=id)
+    if request.method == "POST":
+        resume.title = request.POST["title"]
+        resume.education_degree = request.POST["education_degree"]
+        resume.age = request.POST["age"]
+        resume.experience_years = request.POST["experience_years"]
+        resume.previous_employment = request.POST["prev_emp"]
+        resume.save()
+        return redirect(f'/resume-info/{resume.id}/')
+    return render(
+        request, 'resume/resume_edit.html',
+        {"resume": resume}
+    )
