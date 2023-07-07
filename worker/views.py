@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import Worker, Resume
+from .forms import ResumeEditForm
 # Create your views here.
 def worker_list(request):
     workers = Worker.objects.all()
@@ -64,3 +65,19 @@ def resume_edit(request, id):
         request, 'resume/resume_edit.html',
         {"resume": resume}
     )
+
+def resume_edit_via_django_form(request, id):
+    resume_object = Resume.objects.get(id=id)
+    if request.method =="GET":
+        form = ResumeEditForm(instance=resume_object)
+        return render(request, 'resume/resume_edit_dj_forms.html',
+                      {'form':form})
+
+    elif request.method == "POST":
+        form = ResumeEditForm(data=request.POST, instance=resume_object)
+        if form.is_valid():
+            object = form.save()
+            return redirect(resume_info, id=object.id)
+        else:
+            return HttpResponse('Форма не валидна')
+

@@ -27,6 +27,8 @@ urlpatterns = [
     path('vacancy/<int:id>/', vacancy_info, name='vacancy-info'),
     path('vacancy-edit/<int:id>/', vacancy_edit, name='vacancy-edit'),
     path('add-vacancy/', add_vacancy, name='add-v'),
+    path('add-vacancy-df/', vacancy_add_via_django_form),
+
 
     path('companies/', company_list),
 
@@ -38,6 +40,7 @@ urlpatterns = [
     path("my-resume/", my_resume, name='my-resume'),
     path('add-resume/', add_resume, name='add-resume'),
     path('resume-edit/<int:id>/', resume_edit, name='resume-edit'),
+    path('resume-edit-df/<int:id>/', resume_edit_via_django_form, name='resume-edit-django'),
 
     path('search/', search, name='search'),
 

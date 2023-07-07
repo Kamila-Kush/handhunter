@@ -3,11 +3,11 @@ from worker.models import Worker
 from django.contrib.auth.models import User
 
 class Vacancy(models.Model):
-    title = models.CharField(max_length=255)
-    salary = models.IntegerField(null=True, blank=True)
-    description = models.TextField(default='Нет описания')
-    is_relevant = models.BooleanField(default=True)
-    email = models.EmailField()
+    title = models.CharField(max_length=255, verbose_name='Вакансия')
+    salary = models.IntegerField(null=True, blank=True, verbose_name='Зарплата')
+    description = models.TextField(default='Нет описания', verbose_name='Описание')
+    is_relevant = models.BooleanField(default=True, verbose_name='Актуально')
+    email = models.EmailField(verbose_name='Электронная почта')
     contacts = models.CharField(max_length=100, verbose_name='Контакты')
     candidate = models.ManyToManyField(
         to=Worker,

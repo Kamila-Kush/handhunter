@@ -4,11 +4,11 @@
 <br><br>
     <form method="POST">
         {% csrf_token %}
-        <input type="text" name="form-title" placeholder="Должность">
-        <input type="number" name="form-salary" placeholder="Оклад">
-        <textarea name="form-descr" cols="20" rows="5" placeholder="Описание"></textarea>
-        <input type="email" name="form-email" placeholder="e-mail">
-        <input type="text" name="form-cont" placeholder="Контакты">
+        <input type="text" name="form-title" placeholder="Должность"required><br>
+        <input type="number" name="form-salary" placeholder="Оклад"><br>
+        <textarea name="form-descr" cols="20" rows="5" placeholder="Описание"></textarea><br>
+        <input type="email" name="form-email" placeholder="e-mail"><br>
+        <input type="text" name="form-cont" placeholder="Контакты"><br>
         <button>Добавить</button>
     </form>
 

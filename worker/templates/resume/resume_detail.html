@@ -10,5 +10,7 @@
   <hr/>
   <div>{{ resume.created_at }}</div>
 
- <a href="{% url 'resume-edit' resume.id %}">Изменить</a>
+ <a href="{% url 'resume-edit' resume.id %}">Изменить</a><br><br>
+
+ <a href="{% url 'resume-edit-django' resume.id %}">Изменить через джанго формы</a>
 {% endblock %}
