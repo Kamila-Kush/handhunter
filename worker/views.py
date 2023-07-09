@@ -81,3 +81,15 @@ def resume_edit_via_django_form(request, id):
         else:
             return HttpResponse('Форма не валидна')
 
+def resume_add_via_django_form(request):
+    if request.method =="POST":
+        form = ResumeEditForm(request.POST)
+        if form.is_valid():
+            new_resume = form.save()
+            return redirect(f'/resume-info/{new_resume.id}/')
+    resume_form = ResumeEditForm()
+    return render(
+        request,
+        'resume/resume_django_forms.html',
+        {'resume_form': resume_form}
+    )

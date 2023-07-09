@@ -41,10 +41,16 @@ class Category(models.Model):
         return self.title
 
 class Company(models.Model):
-    title = models.CharField(max_length=255)
-    address = models.TextField()
-    number_of_employees = models.IntegerField()
-    is_hunting = models.BooleanField(default=True)
+    title = models.CharField(max_length=255, verbose_name='Название')
+    founding_date = models.DateField(null=True, blank=True, verbose_name='Дата основания')
+    address = models.TextField(verbose_name='Адрес')
+    number_of_employees = models.IntegerField(verbose_name='Количество сотрудников')
+    is_hunting = models.BooleanField(default=True, verbose_name='Ищет сотрудников')
+    employee = models.ManyToManyField(
+        to=Worker,
+        blank=True,
+        verbose_name='Работники'
+    )
 
     def __str__(self):
         return self.title

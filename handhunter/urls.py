@@ -18,27 +18,34 @@ from django.contrib import admin
 from django.urls import path
 from core.views import *
 from worker.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage, name='home'),
     path('about_us/', about_us),
+
+    path('workers/', worker_list),
+    path('worker/<int:id>/', worker_info),
+
     path('vacancies/', vacancy_list),
     path('vacancy/<int:id>/', vacancy_info, name='vacancy-info'),
     path('vacancy-edit/<int:id>/', vacancy_edit, name='vacancy-edit'),
     path('add-vacancy/', add_vacancy, name='add-v'),
     path('add-vacancy-df/', vacancy_add_via_django_form),
-
+    path('vacancy-edit-df/<int:id>/', vacancy_edit_via_form, name='vacancy-edit-django'),
 
     path('companies/', company_list),
-
-    path('workers/', worker_list),
-    path('worker/<int:id>/', worker_info),
+    path('company-info/<int:id>/', company_info, name='company-info'),
+    path('add-company/', company_add_via_django_forms, name='add-company'),
+    path('company-edit/<int:id>/', company_edit_via_django, name='to-edit-company'),
 
     path("resume-list/", resume_list),
     path("resume-info/<int:id>/", resume_info, name='resume-info'),
     path("my-resume/", my_resume, name='my-resume'),
     path('add-resume/', add_resume, name='add-resume'),
+    path('add-resume-df', resume_add_via_django_form, name='add-resume-df'),
     path('resume-edit/<int:id>/', resume_edit, name='resume-edit'),
     path('resume-edit-df/<int:id>/', resume_edit_via_django_form, name='resume-edit-django'),
 
@@ -46,4 +53,6 @@ urlpatterns = [
 
     path('registration/', reg_view, name='reg'),
 
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# http:/ ..../static/my_style.css   #/handhunter/core/static/my_style.css
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

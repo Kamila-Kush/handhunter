@@ -4,7 +4,7 @@
 
   <h1>Компании</h1>
       {% for c in companies %}
-          <div><strong>{{c.title}}</strong> {% if c.is_hunting %} - Ищем сотрудников
+          <div><a href="{% url 'company-info' c.id %}"><strong>{{c.title}}</strong></a> {% if c.is_hunting %} - Ищем сотрудников
               {% endif %}
           </div>
       {% endfor %}

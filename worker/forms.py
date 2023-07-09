@@ -8,5 +8,6 @@ class ResumeEditForm(forms.ModelForm):
                   'education_degree',
                   'age',
                   'experience_years',
-                  'previous_employment'
+                  'previous_employment',
+                  'worker'
                   ]
