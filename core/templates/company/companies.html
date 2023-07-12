@@ -4,9 +4,14 @@
 
   <h1>Компании</h1>
       {% for c in companies %}
-          <div><a href="{% url 'company-info' c.id %}"><strong>{{c.title}}</strong></a> {% if c.is_hunting %} - Ищем сотрудников
-              {% endif %}
-          </div>
+            <ul class="list-group list-group-flush">
+          <li><a href="{% url 'company-info' c.id %}" class="list-group-item list-group-item-primary"><strong>{{c.title}}</strong></a>
+              {% if c.is_hunting %}
+              - Ищем сотрудников
+              {% else %}
+              - В работниках не нуждаемся
+              {% endif %}</li>
+            </ul>
       {% endfor %}
 
 {% endblock %}

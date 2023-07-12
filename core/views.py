@@ -111,10 +111,9 @@ def vacancy_edit_via_form(request, id):
 
 
 def company_list(request):
-    # if request.user.is_superuser.is_authenticated:
-        companies = Company.objects.all()
-        context = {'companies': companies}
-        return render(request, 'company/companies.html', context)
+    companies = Company.objects.all()
+    context = {'companies': companies}
+    return render(request, 'company/companies.html', context)
 
 
 def company_info(request, id):
@@ -131,18 +130,18 @@ def company_info(request, id):
 
 
 def company_add_via_django_forms(request):
-    # if request.user.is_superuser.is_authenticated:
-        if request.method == "POST":
-            form = CompanyForm(request.POST)
-            if form.is_valid():
-                new_company = form.save()
-                return redirect(f'/company-info/{new_company.id}/')
-        company_form = CompanyForm()
-        return render(
-            request,
-            'company/company_django_forms.html',
-            {'company_form': company_form}
-        )
+    if request.method == "POST":
+        form = CompanyForm(request.POST)
+        if form.is_valid():
+            new_company = form.save()
+            return redirect(f'/company-info/{new_company.id}/')
+    company_form = CompanyForm()
+    return render(
+        request,
+        'company/company_django_forms.html',
+        {'company_form': company_form}
+    )
+
 
 
 def company_edit_via_django(request, id):
