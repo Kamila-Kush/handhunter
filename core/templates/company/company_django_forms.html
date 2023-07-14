@@ -4,12 +4,12 @@
 
 {% block content %}
 <h1>Добавление компании</h1>
-
+<div class="container">
     <form method="POST">
       {% csrf_token %}
-      {% bootstrap_form company_form %} <!--Форма бутсрап+джанго-->
-      <!--{{ company_form.as_p }} Джанго форма-->
+      {% bootstrap_form company_form %}  <!--Форма бутсрап+джанго-->
+     <!--{{ company_form.as_p }}-->
       <button type="button" class="btn btn-primary">Добавить</button>
     </form>
-
+</div>
 {% endblock %}

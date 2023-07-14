@@ -3,11 +3,11 @@
 
 {% block content %}
 <br><br>
-  <form method="POST">
+  <form class="mb-3" method="POST">
     {% csrf_token %}
-    <div class="mb-3">
+
     {% bootstrap_form resume_form %}
-    </div>
+
     <button type="button" class="btn btn-primary">Добавить</button>
 
   </form>

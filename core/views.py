@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
+from django.contrib.auth import authenticate, login, logout
 from .models import Vacancy, Company
 from django.contrib.auth.models import User
 from .forms import VacancyForm, CompanyForm
@@ -8,17 +9,14 @@ from .forms import VacancyForm, CompanyForm
 def homepage(request):
     return render(request=request, template_name='index.html')
 
-
 def about_us(request):
     return render(request, 'about_us.html')
-
 
 def search(request):
     word = request.GET["keyword"]
     vacancy_list = Vacancy.objects.filter(title__contains=word)
     context = {"vacancies": vacancy_list}
     return render(request, 'vacancy/vacancies.html', context)
-
 
 def reg_view(request):
     if request.method == "POST":
@@ -34,12 +32,10 @@ def reg_view(request):
         "auth/registration.html"
     )
 
-
 def vacancy_list(request):
     vacancies = Vacancy.objects.all()
     context = {'vacancies': vacancies}
     return render(request, 'vacancy/vacancies.html', context)
-
 
 def vacancy_info(request, id):
     vacancy_object = Vacancy.objects.get(id=id)
@@ -48,7 +44,6 @@ def vacancy_info(request, id):
         'vacancy': vacancy_object,
         'candidates': candidates}
     return render(request, 'vacancy/vacancy.html', context)
-
 
 def add_vacancy(request):
     if request.method == "POST":
@@ -62,7 +57,6 @@ def add_vacancy(request):
         new_vac.save()
         return redirect(f'/vacancy/{new_vac.id}/')
     return render(request, 'vacancy/add_vacancy.html')
-
 
 def vacancy_edit(request, id):
     vacancy = Vacancy.objects.get(id=id)
@@ -79,7 +73,6 @@ def vacancy_edit(request, id):
         {"vacancy": vacancy}
     )
 
-
 def vacancy_add_via_django_form(request):
     if request.method == "POST":
         form = VacancyForm(request.POST)
@@ -92,7 +85,6 @@ def vacancy_add_via_django_form(request):
         'vacancy/vacancy_django_forms.html',
         {'vacancy_form': vacancy_form}
     )
-
 
 def vacancy_edit_via_form(request, id):
     vacancy_object = Vacancy.objects.get(id=id)
@@ -109,12 +101,10 @@ def vacancy_edit_via_form(request, id):
         else:
             return HttpResponse('Форма не валидна')
 
-
 def company_list(request):
     companies = Company.objects.all()
     context = {'companies': companies}
     return render(request, 'company/companies.html', context)
-
 
 def company_info(request, id):
     company = Company.objects.get(id=id)
@@ -128,7 +118,6 @@ def company_info(request, id):
         }
     )
 
-
 def company_add_via_django_forms(request):
     if request.method == "POST":
         form = CompanyForm(request.POST)
@@ -141,8 +130,6 @@ def company_add_via_django_forms(request):
         'company/company_django_forms.html',
         {'company_form': company_form}
     )
-
-
 
 def company_edit_via_django(request, id):
     company_object = Company.objects.get(id=id)
@@ -160,3 +147,20 @@ def company_edit_via_django(request, id):
             return redirect(company_info, id=obj.id)
         else:
             return HttpResponse('Форма не валидна')
+
+def sign_in(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user:
+            login(request, user)
+            return redirect('home')
+        else:
+            return HttpResponse("Неверный логин или пароль")
+
+    return render(request, 'auth/sign_in.html')
+
+def sign_out(request):
+    logout(request)
+    return redirect(sign_in)

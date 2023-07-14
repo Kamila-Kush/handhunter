@@ -2,11 +2,13 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-<br><br>
+<br>
+<h2>Создание вакансии</h2>
+<div class="container">
     <form method="POST">
         {% csrf_token %}
          {% bootstrap_form vacancy_form %}
          <button type="button" class="btn btn-primary">Добавить</button>
     </form>
-
+</div>
 {% endblock %}

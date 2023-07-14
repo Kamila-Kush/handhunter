@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-
+<br>
 {% block content %}
-
+<div class="container">
     <form method="POST">
         {% csrf_token %}
         <input type="text" name="username">
         <input type="password" name="password">
         <button>Зарегистрироваться</button>
     </form>
-
+</div>
 {% endblock %}

@@ -52,6 +52,8 @@ urlpatterns = [
     path('search/', search, name='search'),
 
     path('registration/', reg_view, name='reg'),
+    path('sign-in/', sign_in, name='sign-in'),
+    path('sign-out/', sign_out, name='sign-out'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # http:/ ..../static/my_style.css   #/handhunter/core/static/my_style.css
