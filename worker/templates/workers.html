@@ -4,7 +4,9 @@
 
     <h1>Работники</h1>
       {% for w in workers %}
-        <div>{{w.name}} - {{w.specialization}}</div>
+<ul class="list-group">
+    <li class="list-group-item">{{w.name}} - {{w.specialization}}</li>
+</ul>
       {% endfor %}
 
 {% endblock %}

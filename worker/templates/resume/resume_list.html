@@ -4,9 +4,10 @@
 {% block content %}
     <h1>Резюме</h1>
     {% for r in resumes %}
-        <div>
-            <a href="{% url 'resume-info' r.id %}">{{ r.title }}</a>
-        </div>
+<ul class="list-group">
+  <li class="list-group-item"><a href="{% url 'resume-info' r.id %}">{{ r.title }}</a></li>
+</ul>
+
     {% endfor %}
 
 {% endblock %}

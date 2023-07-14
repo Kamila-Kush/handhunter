@@ -6,9 +6,9 @@ class Worker(models.Model):
         null=True, blank=False,
         on_delete=models.CASCADE
     )
-    name = models.CharField(max_length=255)
-    specialization = models.CharField(max_length=255)
-    salary = models.IntegerField(null=True, blank=True)
+    name = models.CharField(max_length=255, verbose_name='Имя')
+    specialization = models.CharField(max_length=255, verbose_name='Специализация')
+    salary = models.IntegerField(null=True, blank=True, verbose_name='Желаемая зарплата')
     is_searching = models.BooleanField()
 
     def __str__(self):
@@ -32,12 +32,12 @@ class Comment(models.Model):
 
 
 class Resume(models.Model):
-    title = models.CharField(max_length=200)
-    education_degree = models.CharField(max_length=200)
-    age = models.IntegerField()
-    experience_years = models.IntegerField()
-    previous_employment = models.CharField(max_length=255, null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=200, verbose_name='Профессия')
+    education_degree = models.CharField(max_length=200, verbose_name='Образование')
+    age = models.IntegerField(verbose_name='Возраст')
+    experience_years = models.IntegerField(verbose_name='Опыт работы')
+    previous_employment = models.CharField(max_length=255, null=True, blank=True, verbose_name='Предыдущее место работы')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
 
     worker = models.ForeignKey(
         to=Worker,

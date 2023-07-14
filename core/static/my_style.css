@@ -1,3 +1,8 @@
 h1 {
     color: #016878;
 }
+.positioned {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}

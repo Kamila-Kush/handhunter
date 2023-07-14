@@ -1,15 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<br><br>
-    <form method="POST">
-        {% csrf_token %}
-        <input type="text" name="form-title" placeholder="Должность"required><br>
-        <input type="number" name="form-salary" placeholder="Оклад"><br>
-        <textarea name="form-descr" cols="20" rows="5" placeholder="Описание"></textarea><br>
-        <input type="email" name="form-email" placeholder="e-mail"><br>
-        <input type="text" name="form-cont" placeholder="Контакты"><br>
-         <button type="button" class="btn btn-primary">Добавить</button>
-    </form>
+
+<div class="container mt-3">
+  <h2>Создание вакансии</h2>
+  <form method="POST">
+      {% csrf_token %}
+
+   <div class="mb-3">
+      <label for="title">Должность:</label>
+      <input type="text" class="form-control" id="title" placeholder="Должность" name="form-title">
+   </div>
+
+  <div class="mb-3">
+      <label for="salary">Оклад:</label>
+      <input type="number" class="form-control" id="salary" placeholder="Оклад" name="form-salary">
+   </div>
+
+  <div class="mb-3">
+      <label for="descr">Описание:</label>
+      <input type="text" class="form-control" id="descr" placeholder="Опиание" name="form-descr">
+  </div>
+
+  <div class="mb-3 mt-3">
+      <label for="email">Электронная почта:</label>
+      <input type="email" class="form-control" id="email" placeholder="Электронная почта" name="form-email">
+  </div>
+
+   <div class="mb-3">
+      <label for="contacts">Контакты:</label>
+      <input type="text" class="form-control" id="contacts" placeholder="Контакты" name="form-cont">
+   </div>
+
+    <button type="submit" class="btn btn-primary">Создать</button>
+  </form>
+</div>
 
 {% endblock %}

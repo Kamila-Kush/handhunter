@@ -4,7 +4,11 @@
 {% block content %}
 
     {% for r in resumes %}
-        <div><a href="/resume-info/{{r.id}}">{{ r.title }}</a></div>
+<div class="list-group">
+  <a href="/resume-info/{{r.id}}" class="list-group-item list-group-item-action">{{ r.title }}</a>
+</div>
+
+
     {% endfor %}
 
 

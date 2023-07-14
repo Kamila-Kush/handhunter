@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
 
 {% block content %}
-
+<br><br>
   <form method="POST">
     {% csrf_token %}
-    {{resume_form.as_p }}
+    <div class="mb-3">
+    {% bootstrap_form resume_form %}
+    </div>
     <button type="button" class="btn btn-primary">Добавить</button>
 
   </form>

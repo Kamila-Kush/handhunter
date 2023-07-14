@@ -43,7 +43,7 @@ class Category(models.Model):
 class Company(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название')
     founding_date = models.DateField(null=True, blank=True, verbose_name='Дата основания')
-    address = models.TextField(verbose_name='Адрес')
+    address = models.CharField(max_length=255, verbose_name='Адрес')
     number_of_employees = models.IntegerField(verbose_name='Количество сотрудников')
     is_hunting = models.BooleanField(default=True, verbose_name='Ищет сотрудников')
     employee = models.ManyToManyField(

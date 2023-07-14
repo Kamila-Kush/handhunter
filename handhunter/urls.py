@@ -26,14 +26,14 @@ urlpatterns = [
     path('', homepage, name='home'),
     path('about_us/', about_us, name='ananas'),
 
-    path('workers/', worker_list),
+    path('workers/', worker_list, name='workers'),
     path('worker/<int:id>/', worker_info),
 
-    path('vacancies/', vacancy_list),
+    path('vacancies/', vacancy_list, name='vacancy_list'),
     path('vacancy/<int:id>/', vacancy_info, name='vacancy-info'),
     path('vacancy-edit/<int:id>/', vacancy_edit, name='vacancy-edit'),
     path('add-vacancy/', add_vacancy, name='add-v'),
-    path('add-vacancy-df/', vacancy_add_via_django_form),
+    path('add-vacancy-df/', vacancy_add_via_django_form, name='add-vacancy-df'),
     path('vacancy-edit-df/<int:id>/', vacancy_edit_via_form, name='vacancy-edit-django'),
 
     path('companies/', company_list),
