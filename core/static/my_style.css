@@ -6,3 +6,7 @@ h1 {
     top: 10px;
     right: 30px;
 }
+
+.my-input {
+width: 200px ! important;
+}

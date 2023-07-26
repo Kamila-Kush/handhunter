@@ -48,6 +48,7 @@ def add_resume(request):
         new_resume.age = request.POST["form-age"]
         new_resume.experience_years = request.POST["form-ex_y"]
         new_resume.previous_employment = request.POST["form-pr_e"]
+        new_resume.profile_photo = request.POST["form-profile-photo"]
         new_resume.save()
         return HttpResponse("Резюме сохранено")
 
@@ -74,7 +75,10 @@ def resume_edit_via_django_form(request, id):
                       {'form':form})
 
     elif request.method == "POST":
-        form = ResumeEditForm(data=request.POST, instance=resume_object)
+        form = ResumeEditForm(
+            data=request.POST, instance=resume_object,
+            files=request.FILES
+        )
         if form.is_valid():
             object = form.save()
             return redirect(resume_info, id=object.id)

@@ -3,12 +3,16 @@ from .models import Vacancy, Company
 
 
 class VacancyForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control my-input"}))
     class Meta:
         model = Vacancy
         fields = [
             'title',
             'salary',
             'description',
+            'work_experience',
+            'type_of_employement',
+            'skill',
             'email',
             'contacts'
         ]

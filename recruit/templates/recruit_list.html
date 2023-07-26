@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>Рекрутеры</h1>
+
+     <form method="get">
+       {% for r in recruit %}
+            <ul class="list-group list-group-flush">
+                <li><a href="{% url 'recruit-info' r.id %}" class="list-group-item list-group-item-primary">{{r.name}}></a></li>
+            </ul>
+        </form>
+       {% endfor %}
+
+{% endblock %}

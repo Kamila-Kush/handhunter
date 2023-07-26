@@ -1,8 +1,9 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth import authenticate, login, logout
-from .models import Vacancy, Company
+from .models import Vacancy, Company, Skill
 from django.contrib.auth.models import User
 from .forms import VacancyForm, CompanyForm
+from .filters import VacancyFilter, SkillFilter
 
 
 # Create your views here.
@@ -14,7 +15,7 @@ def about_us(request):
 
 def search(request):
     word = request.GET["keyword"]
-    vacancy_list = Vacancy.objects.filter(title__contains=word)
+    vacancy_list = Vacancy.objects.filter(title__icontains=word)
     context = {"vacancies": vacancy_list}
     return render(request, 'vacancy/vacancies.html', context)
 
@@ -33,9 +34,17 @@ def reg_view(request):
     )
 
 def vacancy_list(request):
-    vacancies = Vacancy.objects.all()
-    context = {'vacancies': vacancies}
+    # vacancies = Vacancy.objects.all()
+    # context = {'vacancies': vacancies}
+    # return render(request, 'vacancy/vacancies.html', context)
+    vacancy_filter = VacancyFilter(request.GET, queryset=Vacancy.objects.all())
+    skill_filter = SkillFilter(request.GET, queryset=Skill.objects.all())
+    context = {"vacancy_filter": vacancy_filter,
+               "skill_filter": skill_filter
+               }
+
     return render(request, 'vacancy/vacancies.html', context)
+
 
 def vacancy_info(request, id):
     vacancy_object = Vacancy.objects.get(id=id)
@@ -119,16 +128,20 @@ def company_info(request, id):
     )
 
 def company_add_via_django_forms(request):
+    context = {}
+
     if request.method == "POST":
-        form = CompanyForm(request.POST)
-        if form.is_valid():
-            new_company = form.save()
-            return redirect(f'/company-info/{new_company.id}/')
+        company_form = CompanyForm(request.POST)
+        if company_form.is_valid():
+            company_form.save()
+            return HttpResponse("Готово!")
+
     company_form = CompanyForm()
+    context["form"] = company_form
     return render(
         request,
         'company/company_django_forms.html',
-        {'company_form': company_form}
+        context
     )
 
 def company_edit_via_django(request, id):

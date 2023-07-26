@@ -15,9 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from core.views import *
 from worker.views import *
+from recruit.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -54,6 +55,8 @@ urlpatterns = [
     path('registration/', reg_view, name='reg'),
     path('sign-in/', sign_in, name='sign-in'),
     path('sign-out/', sign_out, name='sign-out'),
+
+    path('recruit/', recruit, name='recruit')
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # http:/ ..../static/my_style.css   #/handhunter/core/static/my_style.css

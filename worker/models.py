@@ -38,6 +38,9 @@ class Resume(models.Model):
     experience_years = models.IntegerField(verbose_name='Опыт работы')
     previous_employment = models.CharField(max_length=255, null=True, blank=True, verbose_name='Предыдущее место работы')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+    profile_photo = models.ImageField(
+        null=True, blank=True, upload_to="profile_photo/", verbose_name='Фото сотрудника'
+    )
 
     worker = models.ForeignKey(
         to=Worker,
