@@ -21,6 +21,7 @@ from worker.views import *
 from recruit.views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,7 +40,7 @@ urlpatterns = [
 
     path('companies/', company_list),
     path('company-info/<int:id>/', company_info, name='company-info'),
-    path('add-company/', company_add_via_django_forms, name='add-company'),
+    path('add-company/', create_company, name='add-company'),
     path('company-edit/<int:id>/', company_edit_via_django, name='to-edit-company'),
 
     path("resume-list/", resume_list),
@@ -55,8 +56,9 @@ urlpatterns = [
     path('registration/', reg_view, name='reg'),
     path('sign-in/', sign_in, name='sign-in'),
     path('sign-out/', sign_out, name='sign-out'),
+    path('login-generic/', LoginView.as_view(), name='login-generic'),
 
-    path('recruit/', recruit, name='recruit')
+    path('recruit/', include('recruit.urls'))
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # http:/ ..../static/my_style.css   #/handhunter/core/static/my_style.css

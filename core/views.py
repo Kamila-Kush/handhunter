@@ -42,9 +42,13 @@ def vacancy_list(request):
     context = {"vacancy_filter": vacancy_filter,
                "skill_filter": skill_filter
                }
-
     return render(request, 'vacancy/vacancies.html', context)
 
+# def types_employement(request):
+#     if request is None:
+#         return Vacancy.objects.none()
+#     type = request.Vacancy.type_of_employement
+#     return type.types_set.all()
 
 def vacancy_info(request, id):
     vacancy_object = Vacancy.objects.get(id=id)
@@ -127,22 +131,17 @@ def company_info(request, id):
         }
     )
 
-def company_add_via_django_forms(request):
+def create_company(request):
     context = {}
-
     if request.method == "POST":
-        company_form = CompanyForm(request.POST)
-        if company_form.is_valid():
-            company_form.save()
+        form = CompanyForm(request.POST)
+        if form.is_valid():
+            form.save()
             return HttpResponse("Готово!")
 
-    company_form = CompanyForm()
-    context["form"] = company_form
-    return render(
-        request,
-        'company/company_django_forms.html',
-        context
-    )
+    form = CompanyForm()
+    context["form"] = form
+    return render(request, 'company/create_df.html', context)
 
 def company_edit_via_django(request, id):
     company_object = Company.objects.get(id=id)

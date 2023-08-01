@@ -34,8 +34,14 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'workers' %}">Кандидаты</a>
         </li>
-          <li class="nav-item">
-          <a class="nav-link" href="{% url 'recruit' %}">Рекрутеры</a>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Рекрутеры</a>
+              <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{% url 'recruiter-list' %}">Рекрутеры</a></li>
+                  <li><a class="dropdown-item" href="{% url 'recruiter-list-class' %}">Рекрутеры (через класс)</a></li>
+                  <li><a class="dropdown-item" href="{% url 'recruiter-list-class-generic' %}">Рекрутеры (через дженерик)</a></li>
+                  <li><a class="dropdown-item" href="{% url 'create-recruiter' %}">Добавить рекрутера</a></li>
+              </ul>
         </li>
 
           <li class="nav-item dropdown">
@@ -92,6 +98,15 @@
     </div>
   </div>
 </nav>
+
+    {% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
 
 <br><br>
 

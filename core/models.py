@@ -3,7 +3,7 @@ from worker.models import Worker
 from django.contrib.auth.models import User
 
 class Skill(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Навыки")
+    title = models.CharField(max_length=255, verbose_name="Навыки", null=True, blank= True)
 
 
 class Vacancy(models.Model):

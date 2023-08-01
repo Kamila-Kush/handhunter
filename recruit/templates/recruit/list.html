@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>Рекрутеры</h1>
+
+     <form method="get">
+       {% for r in recruiters %}
+           <div>
+               <a href="{% url 'recruiter-detail' r.pk %}">{{ r.user.username }}</a>
+            </div>
+        </form>
+
+        {% empty %}
+        <div>Записей пока нет</div>
+       {% endfor %}
+
+{% endblock %}
