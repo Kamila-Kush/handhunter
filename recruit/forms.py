@@ -3,5 +3,7 @@ from .models import Recruiter
 
 class RecruiterForm(forms.ModelForm):
     class Meta:
-        model=Recruiter
+        model = Recruiter
         exclude = ['user']
+
+

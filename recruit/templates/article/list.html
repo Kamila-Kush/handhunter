@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>Статьи</h1>
+
+     <form method="get">
+       {% for a in article %}
+           <div>
+               <a href="{% url 'article-detail' a.pk %}">{{ a.title }}</a>
+            </div>
+        </form>
+
+        {% empty %}
+        <div>Записей пока нет</div>
+       {% endfor %}
+
+{% endblock %}

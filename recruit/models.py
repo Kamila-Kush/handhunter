@@ -17,3 +17,6 @@ class Recruiter(models.Model):
     class Meta:
         verbose_name = 'Рекрутер'
         verbose_name_plural = 'Рекрутеры'
+
+
+

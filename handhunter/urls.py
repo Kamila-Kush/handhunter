@@ -58,7 +58,8 @@ urlpatterns = [
     path('sign-out/', sign_out, name='sign-out'),
     path('login-generic/', LoginView.as_view(), name='login-generic'),
 
-    path('recruit/', include('recruit.urls'))
+    path('recruit/', include('recruit.urls')),
+    path('article/', include('article.urls')),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # http:/ ..../static/my_style.css   #/handhunter/core/static/my_style.css

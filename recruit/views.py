@@ -81,3 +81,6 @@ class RecruiterUpdateView2(View):
         return self.my_render(request, context)
 
 
+
+
+
