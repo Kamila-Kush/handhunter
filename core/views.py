@@ -8,7 +8,9 @@ from .filters import VacancyFilter, SkillFilter
 
 # Create your views here.
 def homepage(request):
-    return render(request=request, template_name='index.html')
+    if request.method == "POST":
+        return HttpResponse("Метод не разрешён, только GET", status=405)
+    return render(request=request, template_name="index.html")
 
 def about_us(request):
     return render(request, 'about_us.html')

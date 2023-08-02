@@ -100,12 +100,12 @@
 </nav>
 
     {% if messages %}
-<div class="messages">
+<ul class="messages">
     {% for message in messages %}
-    <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    <li {% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
-</div>
-{% endif %}
+</ul>
+    {% endif %}
 
 
 <br><br>

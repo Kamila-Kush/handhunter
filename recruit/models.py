@@ -14,3 +14,6 @@ class Recruiter(models.Model):
 
     # def __str__(self):
     #     return self.user
+    class Meta:
+        verbose_name = 'Рекрутер'
+        verbose_name_plural = 'Рекрутеры'

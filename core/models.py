@@ -35,8 +35,9 @@ class Vacancy(models.Model):
     )
     skill = models.ManyToManyField(
         to=Skill,
-        null=True,
-        blank=True
+        # null=True,
+        blank=True,
+        verbose_name='Навыки'
     )
 
     view_user = models.ManyToManyField(
